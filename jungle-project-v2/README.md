@@ -12,6 +12,14 @@ Marketplace de NFTs em React + TypeScript com mocks em MSW.
 - MSW
 - Tailwind CSS
 
+## API simulada no deploy
+- Em desenvolvimento, o MSW é iniciado automaticamente.
+- No build de demonstração, configure `VITE_ENABLE_MSW=true` para iniciar o mesmo worker publicado.
+- O build executa `msw init public --save` antes do Vite para garantir que `public/mockServiceWorker.js` esteja atualizado e seja copiado para `dist`.
+- A aplicação aguarda o worker estar pronto antes de montar o React e iniciar as consultas.
+- `vercel.json` mantém o fallback de rotas SPA e define o worker como JavaScript, com revalidação para evitar servir uma versão antiga.
+- Se a inicialização do MSW falhar, a aplicação mostra uma mensagem explícita em vez de iniciar sem os mocks.
+
 ## Contratos REST utilizados
 
 ### Sessão e conta
